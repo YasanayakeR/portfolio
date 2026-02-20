@@ -1,5 +1,4 @@
-# Deploy Next.js portfolio to GitHub Pages
-# Enable in repo: Settings → Pages → Source: GitHub Actions
+
 
 name: Deploy
 
@@ -39,12 +38,17 @@ jobs:
       - name: Build
         env:
           PAGES_BASE_PATH: /${{ github.event.repository.name }}
-        run: npm run build
+        run: npx next build --webpack
+
+      - name: Verify build output
+        run: |
+          ls -la
+          test -d out || (echo "out directory not found" && exit 1)
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./out
+          path: out
 
   deploy:
     needs: build
