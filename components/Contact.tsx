@@ -6,7 +6,7 @@ import { Mail, Send, Phone } from "lucide-react";
 export default function Contact() {
     return (
         <section id="contact" className="py-20 bg-slate-950 relative overflow-hidden">
-             {/* Background Elements */}
+           
              <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
                 <div className="absolute top-[20%] right-[10%] w-72 h-72 bg-indigo-500/10 rounded-full blur-3xl" />
                 <div className="absolute bottom-[20%] left-[10%] w-72 h-72 bg-purple-500/10 rounded-full blur-3xl" />

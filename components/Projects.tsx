@@ -102,7 +102,7 @@ export default function Projects() {
                                 </div>
                             </div>
 
-                            {/* Body */}
+         
                             <div className="p-7 h-full flex flex-col">
                                 <div className="mb-4">
                                     <span className="text-xs font-semibold text-indigo-400 tracking-wider uppercase mb-2 block">
