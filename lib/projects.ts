@@ -24,6 +24,8 @@ export type Project = {
   featured?: boolean;
 };
 
+const basePath = process.env.PAGES_BASE_PATH || "";
+
 export const projects: Project[] = [
   {
     slug: "servexa",
@@ -45,7 +47,7 @@ export const projects: Project[] = [
     cover: {
       gradient: ["#312e81", "#6d28d9"],
       accent: "#a78bfa",
-      image: "/projects/servexa.png",
+      image: `${basePath}/projects/servexa.png`,
     },
     featured: true,
   },
@@ -77,7 +79,7 @@ export const projects: Project[] = [
     cover: {
       gradient: ["#0f172a", "#1d4ed8"],
       accent: "#60a5fa",
-      image: "/projects/freshly.png",
+      image: `${basePath}/projects/freshly.png`,
     },
     featured: true,
   },
@@ -101,7 +103,7 @@ export const projects: Project[] = [
     cover: {
       gradient: ["#064e3b", "#0f766e"],
       accent: "#34d399",
-      image: "/projects/skillswap.png",
+      image: `${basePath}/projects/skillswap.png`,
     },
     featured: true,
   },
@@ -127,7 +129,7 @@ export const projects: Project[] = [
     cover: {
       gradient: ["#111827", "#7c3aed"],
       accent: "#c4b5fd",
-      image: "/projects/intelligent-data-room.png",
+      image: `${basePath}/projects/intelligent-data-room.png`,
     },
     featured: true,
   },
@@ -151,7 +153,7 @@ export const projects: Project[] = [
     cover: {
       gradient: ["#3f1d2a", "#be123c"],
       accent: "#fb7185",
-      image: "/projects/sentiment-analysis.png",
+      image: `${basePath}/projects/sentiment-analysis.png`,
     },
   },
   {
@@ -174,7 +176,7 @@ export const projects: Project[] = [
     cover: {
       gradient: ["#0b3a2e", "#0ea5e9"],
       accent: "#7dd3fc",
-      image: "/projects/multimodal-rag.png",
+      image: `${basePath}/projects/multimodal-rag.png`,
     },
   },
   {
@@ -197,7 +199,7 @@ export const projects: Project[] = [
     cover: {
       gradient: ["#0f172a", "#06b6d4"],
       accent: "#67e8f9",
-      image: "/projects/docsync.png",
+      image: `${basePath}/projects/docsync.png`,
     },
   },
   {
@@ -221,7 +223,7 @@ export const projects: Project[] = [
     cover: {
       gradient: ["#1e3a5f", "#0d9488"],
       accent: "#5eead4",
-      image: "/projects/laptop-price-predictor.png",
+      image: `${basePath}/projects/laptop-price-predictor.png`,
     },
   },
 ];
@@ -229,4 +231,3 @@ export const projects: Project[] = [
 export function getProjectBySlug(slug: string) {
   return projects.find((p) => p.slug === slug);
 }
-
