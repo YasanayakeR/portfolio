@@ -24,7 +24,7 @@ export type Project = {
   featured?: boolean;
 };
 
-const basePath = process.env.PAGES_BASE_PATH || "";
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
 export const projects: Project[] = [
   {
