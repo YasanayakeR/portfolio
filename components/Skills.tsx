@@ -1,54 +1,167 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
 
-const skills = {
-    "Programming": ["Java", "JavaScript", "TypeScript", "C#", "Python", "C"],
-    "Frameworks": ["Angular", "ASP.NET Core", "Spring Boot", "React", "FastAPI", "Next.js"],
-    "Databases": ["MySQL", "Microsoft SQL Server", "MongoDB", "PostgreSQL"],
-    "Tools & Platforms": ["Git", "GitHub", "Figma", "Google Colab"],
+const categories = [
+  { id: "all", name: "All Skills" },
+  { id: "programming", name: "Programming" },
+  { id: "frontend", name: "Frontend" },
+  { id: "backend", name: "Backend & DB" },
+  { id: "ai", name: "AI & ML" },
+  { id: "tools", name: "Tools" },
+];
+
+type Skill = {
+  name: string;
+  categories: string[];
+  slug?: string;
+  icon?: string;
+  forceWhite?: boolean;
 };
 
-export default function Skills() {
-    return (
-        <section id="skills" className="py-20 bg-slate-950 relative overflow-hidden">
-            <div className="max-w-7xl mx-auto px-6">
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5 }}
-                    className="mb-16 text-center"
-                >
-                    <h2 className="text-3xl md:text-4xl font-bold mb-4">Technical Skills</h2>
-                    <div className="w-20 h-1 bg-indigo-500 mx-auto rounded-full" />
-                </motion.div>
+const skills: Skill[] = [
+  // Programming
+  {
+    name: "Java",
+    categories: ["programming"],
+    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg",
+  },
+  {
+    name: "C",
+    categories: ["programming"],
+    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg",
+  },
+  {
+    name: "Python",
+    categories: ["programming", "ai"],
+    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg",
+  },
+  {
+    name: "C#",
+    categories: ["programming"],
+    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg",
+  },
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    {Object.entries(skills).map(([category, items], index) => (
-                        <motion.div
-                            key={category}
-                            initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: index * 0.1, duration: 0.5 }}
-                            className="bg-slate-900/50 p-8 rounded-2xl border border-slate-800 hover:border-indigo-500/30 transition-colors"
-                        >
-                            <h3 className="text-xl font-semibold mb-6 text-indigo-300">{category}</h3>
-                            <div className="flex flex-wrap gap-3">
-                                {items.map((skill) => (
-                                    <span
-                                        key={skill}
-                                        className="px-4 py-2 bg-slate-800 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-indigo-600 transition-all cursor-default"
-                                    >
-                                        {skill}
-                                    </span>
-                                ))}
-                            </div>
-                        </motion.div>
-                    ))}
+  // Frontend
+  { name: "React", categories: ["frontend"], slug: "react" },
+
+  // force white for visibility
+  { name: "Next.js", categories: ["frontend"], slug: "nextdotjs", forceWhite: true },
+  { name: "Angular", categories: ["frontend"], slug: "angular", forceWhite: true },
+
+  { name: "Tailwind CSS", categories: ["frontend"], slug: "tailwindcss" },
+  { name: "JavaScript", categories: ["frontend"], slug: "javascript" },
+  { name: "TypeScript", categories: ["frontend"], slug: "typescript" },
+
+  // Backend
+  { name: "ASP.NET Core", categories: ["backend"], slug: "dotnet" },
+  { name: "Node.js", categories: ["backend"], slug: "nodedotjs" },
+  { name: "Express.js", categories: ["backend"], slug: "express", forceWhite: true },
+  { name: "FastAPI", categories: ["ai", "backend"], slug: "fastapi" },
+  { name: "Spring Boot", categories: ["backend"], slug: "springboot" },
+  { name: "MySQL", categories: ["backend"], slug: "mysql" },
+  { name: "PostgreSQL", categories: ["backend"], slug: "postgresql" },
+  { name: "MongoDB", categories: ["backend"], slug: "mongodb" },
+  { name: "SQLite", categories: ["backend"], slug: "sqlite", forceWhite: true },
+
+  // AI
+  { name: "LangGraph", categories: ["ai"], slug: "langchain", forceWhite: true },
+  { name: "Jupyter", categories: ["ai"], slug: "jupyter" },
+  { name: "Google Colab", categories: ["ai"], slug: "googlecolab" },
+
+  // Tools
+  { name: "Git", categories: ["tools"], slug: "git" },
+  { name: "GitHub", categories: ["tools"], slug: "github", forceWhite: true },
+  { name: "Docker", categories: ["tools"], slug: "docker" },
+  { name: "Figma", categories: ["tools"], slug: "figma" },
+];
+
+export default function Skills() {
+  const [activeTab, setActiveTab] = useState("all");
+  const [loading, setLoading] = useState(false);
+
+  const handleTabClick = (tab: string) => {
+    if (tab === activeTab) return;
+
+    setLoading(true);
+    setTimeout(() => {
+      setActiveTab(tab);
+      setLoading(false);
+    }, 400); 
+  };
+
+  const filteredSkills =
+    activeTab === "all"
+      ? skills
+      : skills.filter((skill) => skill.categories.includes(activeTab));
+
+  const getIconSrc = (skill: Skill) => {
+    if (skill.icon) return skill.icon;
+
+    if (skill.slug) {
+      if (skill.forceWhite) {
+        return `https://cdn.simpleicons.org/${skill.slug}/ffffff`;
+      }
+      return `https://cdn.simpleicons.org/${skill.slug}`;
+    }
+
+    return "";
+  };
+
+  return (
+    <section id="skills" className="py-20 bg-slate-950">
+      <div className="max-w-7xl mx-auto px-6">
+
+        <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">
+          Technical Skills
+        </h2>
+
+        {/* Tabs */}
+        <div className="flex flex-wrap justify-center gap-2 mb-12">
+          {categories.map((category) => (
+            <button
+              key={category.id}
+              onClick={() => handleTabClick(category.id)}
+              className={`px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${
+                activeTab === category.id
+                  ? "bg-indigo-600 text-white shadow-lg shadow-indigo-500/25"
+                  : "bg-slate-900 text-slate-400 hover:bg-slate-800 border border-slate-800"
+              }`}
+            >
+              {category.name}
+            </button>
+          ))}
+        </div>
+
+        {/* Loading Spinner */}
+        {loading ? (
+          <div className="flex justify-center py-20">
+            <div className="w-10 h-10 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin" />
+          </div>
+        ) : (
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+            {filteredSkills.map((skill) => (
+              <div
+                key={skill.name}
+                className="group bg-slate-900/60 p-6 rounded-2xl border border-slate-800 hover:border-indigo-500/40 transition-all flex flex-col items-center gap-4 text-center"
+              >
+                <div className="w-16 h-16 flex items-center justify-center bg-slate-800 rounded-xl group-hover:bg-slate-700 transition-all">
+                  <img
+                    src={getIconSrc(skill)}
+                    alt={skill.name}
+                    className="w-10 h-10 object-contain"
+                    loading="lazy"
+                  />
                 </div>
-            </div>
-        </section>
-    );
+
+                <span className="text-sm text-slate-300 group-hover:text-white transition-colors">
+                  {skill.name}
+                </span>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </section>
+  );
 }

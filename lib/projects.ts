@@ -49,7 +49,6 @@ export const projects: Project[] = [
       accent: "#a78bfa",
       image: `${basePath}/projects/servexa.png`,
     },
-    featured: true,
   },
   {
     slug: "laundry-management-system",
@@ -105,7 +104,6 @@ export const projects: Project[] = [
       accent: "#34d399",
       image: `${basePath}/projects/skillswap.png`,
     },
-    featured: true,
   },
   {
     slug: "intelligent-data-room",
@@ -178,6 +176,7 @@ export const projects: Project[] = [
       accent: "#7dd3fc",
       image: `${basePath}/projects/multimodal-rag.png`,
     },
+      featured: true,
   },
   {
     slug: "docsync",
@@ -201,6 +200,7 @@ export const projects: Project[] = [
       accent: "#67e8f9",
       image: `${basePath}/projects/docsync.png`,
     },
+      featured: true,
   },
   {
     slug: "laptop-price-predictor",
@@ -225,7 +225,47 @@ export const projects: Project[] = [
       accent: "#5eead4",
       image: `${basePath}/projects/laptop-price-predictor.png`,
     },
+
   },
+
+  {
+  slug: "shelfwise",
+  title: "ShelfWise",
+  date: "Mar 2026",
+  role: "Full Stack Developer",
+  type: "Individual project",
+  summary:
+    "A secure web-based Library Management System for managing books and categories with JWT authentication, BCrypt password hashing, and a layered architecture ensuring scalability and maintainability.",
+  highlights: [
+    "JWT-based authentication and role-based authorization",
+    "Secure password storage using BCrypt hashing",
+    "Full CRUD operations for books and category management",
+    "Layered architecture (Controller, Service, Data Access)",
+    "Automatic database migration and seeding with EF Core",
+    "Responsive UI with protected routes"
+  ],
+  stack: [
+    "React",
+    "TypeScript",
+    "Tailwind CSS",
+    "Axios",
+    "React Router",
+    "ASP.NET Core 8.0",
+    "Entity Framework Core",
+    "SQLite",
+    "JWT",
+    "BCrypt.Net"
+  ],
+  links: {
+    github: "https://github.com/YasanayakeR/ShelfWise"
+  },
+  cover: {
+    gradient: ["#1e3a8a", "#2563eb"],
+    accent: "#60a5fa",
+    image: `${basePath}/projects/shelfwise.png`,
+  },
+
+},
 ];
 
 export function getProjectBySlug(slug: string) {

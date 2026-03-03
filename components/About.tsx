@@ -7,8 +7,8 @@ import { projects } from "@/lib/projects";
 import ProfilePic from "@/public/profile-pic.png";
 
 const stats = [
-  { label: "Skills", value: 20, suffix: " +" },
-  { label: "Projects", value: projects.length, suffix: " +" },
+  { label: "Skills", value: 25, suffix: " +" },
+  { label: "Projects", value: (projects.length)-1, suffix: " +" },
  { label: "Hands on Experience", value: 3, suffix: " years +" }
 ];
 
