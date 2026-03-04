@@ -257,7 +257,7 @@ export const projects: Project[] = [
     "BCrypt.Net"
   ],
   links: {
-    github: "https://github.com/YasanayakeR/ShelfWise"
+    github: "https://github.com/YasanayakeR/library-management-system"
   },
   cover: {
     gradient: ["#1e3a8a", "#2563eb"],
