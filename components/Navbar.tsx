@@ -9,6 +9,7 @@ const navLinks = [
     { name: "About", href: "#about" },
     { name: "Education", href: "#education" },
     { name: "Skills", href: "#skills" },
+    { name: "Certificates", href: "#certificates" },
     { name: "Projects", href: "#projects" },
     { name: "Contact", href: "#contact" },
 ];
@@ -41,17 +42,16 @@ export default function Navbar() {
             <div className="max-w-7xl mx-auto px-6 sm:px-12">
                 <div className="flex items-center justify-end h-20">
 
-     
+
                     <div className="hidden md:flex items-center space-x-8">
                         {navLinks.map((link) => (
                             <Link
                                 key={link.name}
                                 href={link.href}
-                                className={`relative text-sm font-medium transition-colors pb-1 ${
-                                    activeLink === link.href
-                                        ? "text-indigo-400"
-                                        : "text-slate-300 hover:text-indigo-400"
-                                }`}
+                                className={`relative text-base font-medium transition-colors pb-1 ${activeLink === link.href
+                                    ? "text-indigo-400"
+                                    : "text-slate-300 hover:text-indigo-400"
+                                    }`}
                                 onClick={(e) => {
                                     e.preventDefault();
                                     setActiveLink(link.href);
@@ -79,7 +79,7 @@ export default function Navbar() {
                         </div>
                     </div>
 
-             
+
                     <div className="md:hidden">
                         <button
                             onClick={() => setIsOpen(!isOpen)}
@@ -104,11 +104,10 @@ export default function Navbar() {
                                 <Link
                                     key={link.name}
                                     href={link.href}
-                                    className={`block text-lg font-medium py-2 border-b border-transparent ${
-                                        activeLink === link.href
-                                            ? "text-indigo-400 border-indigo-500"
-                                            : "text-slate-300 hover:text-indigo-400"
-                                    }`}
+                                    className={`block text-xl font-medium py-2 border-b border-transparent ${activeLink === link.href
+                                        ? "text-indigo-400 border-indigo-500"
+                                        : "text-slate-300 hover:text-indigo-400"
+                                        }`}
                                     onClick={(e) => {
                                         e.preventDefault();
                                         setActiveLink(link.href);
