@@ -4,6 +4,8 @@ import { motion } from "framer-motion";
 import { ArrowDown, ChevronDown } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+
 export default function Hero() {
     const [cvOpen, setCvOpen] = useState(false);
     const cvRef = useRef<HTMLDivElement | null>(null);
@@ -22,7 +24,7 @@ export default function Hero() {
 
     return (
         <section id="home" className="relative h-screen flex items-center justify-center overflow-hidden pt-20">
-   
+
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_var(--tw-gradient-stops))] from-indigo-900/20 via-slate-950 to-slate-950" />
             <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-600/20 rounded-full blur-[100px]" />
             <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-indigo-600/20 rounded-full blur-[100px]" />
@@ -74,7 +76,7 @@ export default function Hero() {
                                 >
                                     <a
                                         role="menuitem"
-                                        href="/cv/RohansiYasanayakeCV.pdf"
+                                        href={`${basePath}/cv/RohansiYasanayakeCV.pdf`}
                                         download
                                         className="block px-4 py-3 rounded-xl text-sm font-medium text-slate-200 hover:bg-indigo-500/10 hover:text-white transition-colors"
                                         onClick={() => setCvOpen(false)}
@@ -83,7 +85,7 @@ export default function Hero() {
                                     </a>
                                     <a
                                         role="menuitem"
-                                        href="/cv/RohansiYasanayakeCV-AI_Intern.pdf"
+                                        href={`${basePath}/cv/RohansiYasanayakeCV-AI_Intern.pdf`}
                                         download
                                         className="block px-4 py-3 rounded-xl text-sm font-medium text-slate-200 hover:bg-indigo-500/10 hover:text-white transition-colors"
                                         onClick={() => setCvOpen(false)}

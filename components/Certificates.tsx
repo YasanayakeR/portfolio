@@ -5,6 +5,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Award, ExternalLink, ShieldCheck, X } from "lucide-react";
 import Image from "next/image";
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+
 interface Certificate {
     id: string;
     title: string;
@@ -22,7 +24,7 @@ const certificates: Certificate[] = [
         issuer: "BITSA, Rajarata University of Sri Lanka",
         date: "Nov 23, 2024",
         type: "certificate",
-        image: "/certificates/bitcode.png",
+        image: `${basePath}/certificates/bitcode.png`,
     },
     {
         id: "2",
@@ -30,7 +32,7 @@ const certificates: Certificate[] = [
         issuer: "IEEE Student Branch, University of Moratuwa",
         date: "Oct 19, 2024",
         type: "certificate",
-        image: "/certificates/moraxtreme.png",
+        image: `${basePath}/certificates/moraxtreme.png`,
     },
     {
         id: "3",
@@ -38,7 +40,7 @@ const certificates: Certificate[] = [
         issuer: "INTECS, University of Moratuwa",
         date: "Nov 2023",
         type: "certificate",
-        image: "/certificates/coderush.png",
+        image: `${basePath}/certificates/coderush.png`,
     },
     {
         id: "4",
@@ -46,7 +48,7 @@ const certificates: Certificate[] = [
         issuer: "CODL, University of Moratuwa",
         date: "2023",
         type: "certificate",
-        image: "/certificates/web-design.png",
+        image: `${basePath}/certificates/web-design.png`,
     },
     {
         id: "5",
@@ -54,7 +56,7 @@ const certificates: Certificate[] = [
         issuer: "CODL, University of Moratuwa",
         date: "Aug 16, 2022",
         type: "certificate",
-        image: "/certificates/python.png",
+        image: `${basePath}/certificates/python.png`,
     },
 ];
 
@@ -65,7 +67,7 @@ const badges: Certificate[] = [
         issuer: "MongoDB",
         date: "2024",
         type: "badge",
-        image: "/certificates/mongodb-badge.png",
+        image: `${basePath}/certificates/mongodb-badge.png`,
     },
     {
         id: "7",
@@ -73,7 +75,7 @@ const badges: Certificate[] = [
         issuer: "DigitalOcean / Hacktoberfest",
         date: "Oct 2024",
         type: "badge",
-        image: "/certificates/hacktoberfest-l1.png",
+        image: `${basePath}/certificates/hacktoberfest-l1.png`,
     },
     {
         id: "8",
@@ -81,7 +83,7 @@ const badges: Certificate[] = [
         issuer: "DigitalOcean / Hacktoberfest",
         date: "Oct 2024",
         type: "badge",
-        image: "/certificates/hacktoberfest-l2.png",
+        image: `${basePath}/certificates/hacktoberfest-l2.png`,
     },
 ];
 
@@ -187,12 +189,23 @@ function CertificateCard({ cert, index, onClick }: { cert: Certificate; index: n
             onClick={onClick}
             className="bg-slate-900 p-6 rounded-2xl border border-slate-800 hover:border-indigo-500/40 transition-all group flex flex-col cursor-pointer"
         >
-            <div className="w-12 h-12 bg-slate-800 flex items-center justify-center rounded-xl mb-6 group-hover:bg-indigo-500/10 transition-colors">
-                {cert.type === "certificate" ? (
-                    <Award className="text-indigo-400" size={24} />
-                ) : (
-                    <ShieldCheck className="text-indigo-400" size={24} />
-                )}
+            <div className="flex items-start justify-between mb-6">
+                <div className="w-12 h-12 bg-slate-800 flex items-center justify-center rounded-xl group-hover:bg-indigo-500/10 transition-colors">
+                    {cert.type === "certificate" ? (
+                        <Award className="text-indigo-400" size={24} />
+                    ) : (
+                        <ShieldCheck className="text-indigo-400" size={24} />
+                    )}
+                </div>
+                <div className="relative w-24 aspect-[4/3] rounded-lg overflow-hidden border border-slate-800 group-hover:border-indigo-500/30 transition-colors shadow-lg">
+                    <Image
+                        src={cert.image}
+                        alt=""
+                        fill
+                        className="object-cover group-hover:scale-110 transition-transform duration-500"
+                        sizes="96px"
+                    />
+                </div>
             </div>
 
             <h3 className="text-lg font-bold text-slate-100 mb-2 leading-tight group-hover:text-white transition-colors">
@@ -203,7 +216,7 @@ function CertificateCard({ cert, index, onClick }: { cert: Certificate; index: n
 
             <div className="mt-auto">
                 <span className="inline-flex items-center gap-2 text-sm text-slate-400 group-hover:text-indigo-400 transition-colors">
-                    Click to Preview
+                    Click to View Full
                     <ExternalLink size={14} />
                 </span>
             </div>
